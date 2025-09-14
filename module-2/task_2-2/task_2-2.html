@@ -12,31 +12,60 @@
     <ol>
       <li>Where should you use constants, and where should you use variables? Can they all be constants?</li>
       <p>
-				[Replace this with you answer]
+				Man bruker konstanter til verdier som ikke skal endres og variabler til verdier som kan endres. 
+        Hvis man lager en formel på å løse arealet til ulike sirkler så vil pi være konstant og radius en variabel.
+        Eksempel: const pi = 3.14; let radius = 5; let areal = pi * radius * radius;
 			</p>
+  
       <li>How do parentheses affect the arithmetic outcome of an expression?</li>
       <p>
-				[Replace this with you answer]
+				Når man bruker parenteser i programmering sørger datamaskinen for å regne ut det som er inni parentesen før den regner resten av stykket.
+        Eksempel: (2 + 3) * 4 = 20, mens 2 + 3 * 4 = 14
 			</p>
       <li>How do we limit floating-point numbers to a given number of decimals?</li>
       <p>
-				[Replace this with you answer]
+				Man kan begrense flyttall til et gitt antall desimaler ved å bruke metoden toFixed(). 
+        Eksempel: let num = 12.199999; num.toFixed(2); // gir "12.20"
 			</p>
       <li>How can we compare two floating-point values to see if they are equal (is 12.199999 the same as 12.2)?</li>
       <p>
-				[Replace this with you answer]
+				man kan sammenligne to flyttall ved å bruke en liten toleranseverdi (epsilon) for å avgjøre om de er "nære nok" til å bli betraktet som like.
+        Eksempel: 
+        let a = 12.199999;
+        let b = 12.2;
+        let epsilon = 0.000001;
+
+        if (Math.abs(a - b) < epsilon) {
+          console.log("a og b er like");
+        } else {
+          console.log("a og b er ikke like");
+        }
+
+      
 			</p>
       <li>What do comparison operators return, and how can we check if they are FALSE or TRUE?</li>
       <p>
-				[Replace this with you answer]
+				Sammenligningsoperatører gir en bolsk verdi (TRUE eller FALSE) som resultat. Man kan bruke en if-setning for å sjekke om resultatet er TRUE eller FALSE.
+        Eksempel: 
+        if (a > b) {
+          console.log("a er større enn b");
+        } else {
+          console.log("a er ikke større enn b");
+        }
+        
 			</p>
       <li>How does the Math.random() function work, and what can it be used for?</li>
       <p>
-				[Replace this with you answer]
+				Math.random() funksjonen genererer et tilfeldig flyttall mellom 0 (inkludert) og 1 (ekskludert). Den kan brukes til å lage tilfeldige tall for spill, simuleringer, eller andre applikasjoner som krever tilfeldighet.
+        Eksempel: 
+        let randomNum = Math.random(); // gir et tall mellom 0 og 1
+        let randomInt = Math.floor(Math.random() * 10); // gir et heltall mellom 0 og 9
 			</p>
       <li>What is modulus (%), and when do we need this operator in mathematical operations?</li>
       <p>
-				[Replace this with you answer]
+				Modulus-operatoren (%) returnerer resten av en divisjon mellom to tall.
+        eksempel: 5 % 2 gir 1, fordi 5 delt på 2 er 2 med en rest på 1.
+    
 			</p>
     </ol>
 		<script type="module" src="./task_2-2.mjs" defer></script>
