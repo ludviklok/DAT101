@@ -20,3 +20,17 @@ if ( age2 >= ageMovie) {
     printOut("person 2:" + text1);
 }
 }
+
+//Random, 0.0 til 0.9999
+// alle tall mellom 20 og 30
+for(let i = 0; i < 20; i ++){
+let rnd = Math.random();
+printOut("random:" + rnd);
+
+rnd = rnd * 10
+printOut("random:" + rnd);
+
+rnd = Math.floor(rnd) + 20;
+printOut("random:" + rnd);
+printOut("--------------------");
+}
