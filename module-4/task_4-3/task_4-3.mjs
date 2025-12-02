@@ -23,7 +23,7 @@ const MovieGenre = [
   "Adventure",
   "Animation",
   "Biography",
-  "Comedy",
+  "Comedy",fbhhgkfld
   "Crime",
   "Documentary",
   "Drama",
@@ -58,7 +58,7 @@ const MovieGenre = [
 /* Put your code below here!*/
 
 //--- Part 5 ----------------------------------------------------------------------------------------------
-/* Put your code below here!*/
+/* Put your code beloc c w here!*/
 
 //--- Part 6 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
