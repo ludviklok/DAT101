@@ -16,6 +16,8 @@ export class TMenu{
   #spInfo;
   #spGameOverMenu;
   #spMedal;
+  #spScore
+  #spBestScore;
 
 
   constructor(aSpcvs, aSPI){
@@ -38,6 +40,14 @@ export class TMenu{
     this.#spMedal = new TSprite(aSpcvs, aSPI.medal, 202, 163);
     this.#spMedal.visible = false;
 
+    this.#spScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 200, 163);
+    this.#spScore.visible = false;
+
+    this.#spBestScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 200, 193);
+    this.#spBestScore.visible = false;
+
+
+
     
   }
 
@@ -57,6 +67,8 @@ export class TMenu{
     this.#spInfo.draw();
     this.#spGameOverMenu.draw();
     this.#spMedal.draw();
+    this.#spScore.draw();
+    this.#spBestScore.draw();
   }
 
   countDown(){
@@ -81,6 +93,19 @@ export class TMenu{
     this.#spInfo.index = 1;
     this.#spGameOverMenu.visible = true;
     this.#spMedal.visible = true;
+    
+    this.#spScore.visible = true;
+    this.#spScore.value = this.#spGameScore.value;
+
+    this.#spBestScore.visible = true;
+    const bestScore = localStorage.getItem("bestScore") || 0;
+    if (this.#spGameScore.value > bestScore) {
+      localStorage.setItem("bestScore", this.#spGameScore.value);
+      this.#spBestScore.value = this.#spGameScore.value;
+    } else {
+      this.#spBestScore.value = bestScore;
+    }
+
   }
 
  
