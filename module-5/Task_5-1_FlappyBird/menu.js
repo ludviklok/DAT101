@@ -1,7 +1,8 @@
 "use strict";
 import { TSprite, TSpriteButton, TSpriteNumber} from "libSprite";
-import { startGame, EGameStatus } from "./FlappyBird.mjs";
+import { startGame, EGameStatus, resetGame} from "./FlappyBird.mjs";
 import { TSoundFile } from "libSound";
+
 
 const fnCountDown = "./Media/countDown.mp3";
 const fnRunning = "./Media/running.mp3";
@@ -18,11 +19,12 @@ export class TMenu{
   #spMedal;
   #spScore
   #spBestScore;
+  #spPlayBtnGameOver;
 
 
   constructor(aSpcvs, aSPI){
     this.#spTitle = new TSprite(aSpcvs, aSPI.flappyBird, 200, 100);
-    this.#spPlayBtn = new TSpriteButton(aSpcvs, aSPI.buttonPlay, 240, 180);
+    this.#spPlayBtn = new TSpriteButton(aSpcvs, aSPI.buttonPlay, 235, 190);
     this.#spPlayBtn.addEventListener("click", this.spPlayBtnClick.bind(this));
     this.#spCountDown = new TSpriteNumber(aSpcvs, aSPI.numberBig, 280, 190);
     this.#spCountDown.visible = false;
@@ -40,11 +42,15 @@ export class TMenu{
     this.#spMedal = new TSprite(aSpcvs, aSPI.medal, 202, 163);
     this.#spMedal.visible = false;
 
-    this.#spScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 200, 163);
+    this.#spScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 350, 155);
     this.#spScore.visible = false;
 
-    this.#spBestScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 200, 193);
+    this.#spBestScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 350, 195);
     this.#spBestScore.visible = false;
+
+    this.#spPlayBtnGameOver = new TSpriteButton(aSpcvs, aSPI.buttonPlay, 240, 240);
+    this.#spPlayBtnGameOver.addEventListener("click", this.spPlayBtnClick.bind(this));
+    this.#spPlayBtnGameOver.visible = false;
 
 
 
@@ -69,6 +75,7 @@ export class TMenu{
     this.#spMedal.draw();
     this.#spScore.draw();
     this.#spBestScore.draw();
+    this.#spPlayBtnGameOver.draw();
   }
 
   countDown(){
@@ -96,6 +103,12 @@ export class TMenu{
     
     this.#spScore.visible = true;
     this.#spScore.value = this.#spGameScore.value;
+    this.#spGameScore.visible = false;
+    this.#spPlayBtnGameOver.visible = true;
+    
+    
+    
+
 
     this.#spBestScore.visible = true;
     const bestScore = localStorage.getItem("bestScore") || 0;
@@ -106,30 +119,63 @@ export class TMenu{
       this.#spBestScore.value = bestScore;
     }
 
+    if(this.#spScore.value >= 4){
+     
+      this.#spMedal.index = 2;
+
+    } else if(this.#spScore.value >= 3){
+      
+      this.#spMedal.index = 1;
+
+    } else if(this.#spScore.value >= 2){
+     
+      this.#spMedal.index = 3;
+
+    }else if (this.#spScore.value <= 1){
+    
+      this.#spMedal.index = 0;
+    }
+
+    
+ 
   }
 
+
+  resetScore() {
+  this.#spGameScore.value = 0;
+  this.#spGameScore.visible = true;
+
+  this.#spScore.visible = false;
+  this.#spBestScore.visible = false;
+  this.#spGameOverMenu.visible = false;
+  this.#spMedal.visible = false;
+  this.#spPlayBtnGameOver.visible = false;
+}
+
+ 
  
 
   spPlayBtnClick(){
     console.log("Click!");
-    this.#spPlayBtn.hidden = true;
-    this.#spCountDown.visible = true;
-     this.#spTitle.hidden = true;
-     
-     EGameStatus.state == EGameStatus.countDown;
 
-     
-     this.#spInfo.visible = true;
-     this.#spInfo.index = 0;
-     
-     
+  resetGame(); 
 
-    
-    this.#spCountDown.value = 3;
-    this.#sfCountDown = new TSoundFile(fnCountDown);
-    this.#sfCountDown.play();
-    setTimeout(this.countDown.bind(this), 1000);
-  }
+  this.#spPlayBtn.hidden = true;
+  this.#spCountDown.visible = true;
+  this.#spTitle.hidden = true;
+
+  EGameStatus.state = EGameStatus.countDown;
+
+  this.#spInfo.visible = true;
+  this.#spInfo.index = 0;
+
+  this.#spCountDown.value = 3;
+  this.#sfCountDown = new TSoundFile(fnCountDown);
+  this.#sfCountDown.play();
+  setTimeout(this.countDown.bind(this), 1000);
+}
+  
+
 
   setSoundMute(aIsMuted) {
     

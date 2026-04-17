@@ -16,6 +16,7 @@ export class THero extends TSprite {
   #sfFood;
   #sfHeroIsDead;
   #sfGameOver;
+ 
   
   
 
@@ -29,6 +30,7 @@ export class THero extends TSprite {
     this.#sfFood = null;
     this.#sfHeroIsDead = null;
     this.#sfGameOver = null;
+    
     
   }
 
@@ -74,6 +76,16 @@ export class THero extends TSprite {
   
    
   }
+
+  
+
+  restart() {
+  this.x = 100;
+  this.y = 200;
+  this.#speed = 0;
+  this.rotation = 0;
+  this.animationSpeed = 20;
+}
 
   flap() {
     this.#speed = -3.5;

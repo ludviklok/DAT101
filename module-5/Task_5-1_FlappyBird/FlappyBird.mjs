@@ -115,6 +115,24 @@ export function gameOver() {
   menu.gameOver();
 }
 
+
+export function resetGame() {
+  console.log("Resetting game...");
+
+  
+  hero.restart();
+
+ 
+  obstacles.length = 0;
+  baits.length = 0;
+
+ 
+  menu.resetScore();
+}
+
+
+
+
 export function gameOverMenu () {
 EGameStatus.state = EGameStatus.gameOver;
   menu.gameOverMenu();
