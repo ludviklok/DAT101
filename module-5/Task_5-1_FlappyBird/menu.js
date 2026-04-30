@@ -4,6 +4,7 @@ import { startGame, EGameStatus, resetGame} from "./FlappyBird.mjs";
 import { TSoundFile } from "libSound";
 
 
+
 const fnCountDown = "./Media/countDown.mp3";
 const fnRunning = "./Media/running.mp3";
 
@@ -15,7 +16,7 @@ export class TMenu{
   #sfRunning;
   #spGameScore;
   #spInfo;
-  #spGameOverMenu;
+  #spGameOverMenu; 
   #spMedal;
   #spScore
   #spBestScore;
