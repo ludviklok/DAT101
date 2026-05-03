@@ -78,7 +78,7 @@ export class TMenu {
   let frame = 0;
 
   //når play er trykket, animasjon begynner...
-  const animate = setInterval(() => {
+  const animate = setInterval(function(){
     this.#spPlayBtn.index = frame;
     frame++;
 
@@ -92,7 +92,7 @@ export class TMenu {
       this.#spPlayBtn.hidden = true;
     }
 
-  }, 30); // hastighet på animasjonen
+  }.bind(this), 30); // hastighet på animasjonen
 }
 
 //----------------------------------------
@@ -120,7 +120,7 @@ spResumeClick () { //pause klikk funksjon
   let frame = 0;
 
   //når resume er trykket, animasjon begynner...
-  const animate = setInterval(() => {
+  const animate = setInterval(function(){
     this.#spResume.index = frame;
     frame++;
 
@@ -134,7 +134,7 @@ spResumeClick () { //pause klikk funksjon
   
     }
 
-  }, 30); // hastighet på animasjonen
+  }.bind(this), 30); // hastighet på animasjonen
 }
  
 

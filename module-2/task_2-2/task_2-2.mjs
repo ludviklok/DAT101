@@ -110,3 +110,6 @@ let remDays = days1 % 7;
 printOut(weeks+" uker"); 
 printOut(remDays+" dager"); 
 printOut(newLine);
+
+
+

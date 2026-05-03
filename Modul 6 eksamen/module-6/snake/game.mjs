@@ -142,7 +142,7 @@ function drawGame() {
       GameProps.snake.draw();
       break;
 //------------------------------------------------------------------------
-      //tegner gameover meny
+    //tegner gameover meny
     case EGameStatus.GameOver:
     menu.draw(); 
     break;

@@ -234,13 +234,9 @@ export class TSnake {
   } // constructor
 
 //-----------------------------
-//get og set for isDead, gir tilgang til det kontrolerte feltet utenfra klassen
+//get for isDead, gir tilgang til det kontrolerte feltet utenfra klassen
   get isDead() {
   return this.#isDead;
-}
-
-set isDead(aValue) {
-  this.#isDead = aValue;
 }
 //-----------------------------
   draw() {
