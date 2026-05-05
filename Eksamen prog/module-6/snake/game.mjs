@@ -17,8 +17,6 @@ export const backgroundMusic = new Audio ("./media/background.mp3") //bakgrunn m
 const dead = new Audio ("./media/dead.mp3"); //game over lyd
 const baitSound = new Audio ("./media/eat.mp3"); //spise lyd
 
-
-
 //-----------------------------------------------------------------------------------------
 //----------- variables and object --------------------------------------------------------
 //-----------------------------------------------------------------------------------------
@@ -237,3 +235,7 @@ function onKeyDown(event) {
 
 spcvs.loadSpriteImage("./Media/spriteSheet.png", loadGame);
 document.addEventListener("keydown", onKeyDown);
+
+
+
+

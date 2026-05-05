@@ -1,6 +1,6 @@
 "use strict";
 
-import { TSpriteButton, TSprite } from "libSprite";
+import { TSpriteButton, TSprite, TSpriteNumber } from "libSprite";
 import { EGameStatus, newGame, GameProps, backgroundMusic } from "./game.mjs";
 
 export class TMenu {
@@ -9,13 +9,11 @@ export class TMenu {
 #spRetry;
 #spHome;
 #spResume;
+
 #spAppleNumber;
 #spScoreNumber;
-#spScoreNumber2;
-#spScoreNumber3;
 #spGameOverScore;
-#spGameOverScore2;
-#spGameOverScore3;
+
 
 
 
@@ -26,7 +24,6 @@ export class TMenu {
     this.#spPlayBtn.addEventListener("click", this.spPlayBtnClick.bind(this));
     this.#spPlayBtn.visible = true;
 
-  
 
     //Gameover menu
     this.#spGameOverMenu = new TSprite(aSpcvs, aSPI.GameOver, 20, 60);
@@ -48,26 +45,21 @@ export class TMenu {
     this.#spResume.visible = false;
 
     //eple verdi-tall
-    this.#spAppleNumber = new TSprite(aSpcvs, aSPI.Number, 20, 20);
+    this.#spAppleNumber = new TSpriteNumber(aSpcvs, aSPI.Number, 20, 20, 0, 1);
     this.#spAppleNumber.visible = false;
+    this.#spAppleNumber.alpha = 0.5;
 
     //snake score
-    this.#spScoreNumber = new TSprite(aSpcvs, aSPI.Number, 20, 120);
+    this.#spScoreNumber = new TSpriteNumber(aSpcvs, aSPI.Number, 20, 120, 0, 3);
     this.#spScoreNumber.visible = false;
-    this.#spScoreNumber2 = new TSprite(aSpcvs, aSPI.Number, 101, 120);
-    this.#spScoreNumber2.visible = false;
-    this.#spScoreNumber3 = new TSprite(aSpcvs, aSPI.Number, 182, 120);
-    this.#spScoreNumber3.visible = false;
-
+    this.#spScoreNumber.alpha = 0.5;
+   
 
     //Game over score
-    this.#spGameOverScore = new TSprite(aSpcvs, aSPI.Number, 525, 270);
+    this.#spGameOverScore = new TSpriteNumber(aSpcvs, aSPI.Number, 525, 270, 0, 3);
     this.#spGameOverScore.visible = false;
-    this.#spGameOverScore2 = new TSprite(aSpcvs, aSPI.Number, 615, 270);
-    this.#spGameOverScore2.visible = false;
-    this.#spGameOverScore3 = new TSprite(aSpcvs, aSPI.Number, 705, 270);
-    this.#spGameOverScore3.visible = false;
 
+   
     }
 
 //--------------------------------------------------------
@@ -145,7 +137,7 @@ spResumeClick () { //pause klikk funksjon
       
       if (GameProps.gameStatus === EGameStatus.Idle) {
       this.#spPlayBtn.draw();
-      console.log("spillknapp vises");
+      
       }
 
     //------------------------------------------------------------------
@@ -153,21 +145,15 @@ spResumeClick () { //pause klikk funksjon
        if (GameProps.gameStatus === EGameStatus.Playing) {
        
         this.#spAppleNumber.visible = true;
-        
         this.#spScoreNumber.visible = true;
-        this.#spScoreNumber2.visible = true;
-        this.#spScoreNumber3.visible = true;
+        
+        this.#spAppleNumber.value = GameProps.appleValue;
+        this.#spScoreNumber.value = GameProps.score;
+        
 
-        this.#spAppleNumber.index = GameProps.appleValue;
-        //Her fikk jeg veiledning fra AI på hvordan man henter riktig tall basert på 100, 10 og ener plass. Fil vedlagt.
-        this.#spScoreNumber.index = Math.floor(GameProps.score / 100)%10; //finner hundre plassen
-        this.#spScoreNumber2.index = Math.floor(GameProps.score / 10)%10; //finner tier plassen
-        this.#spScoreNumber3.index = GameProps.score % 10; //finner ener plassen
-
-      this.#spAppleNumber.draw();
-      this.#spScoreNumber.draw();
-      this.#spScoreNumber2.draw();
-      this.#spScoreNumber3.draw();
+        this.#spAppleNumber.draw();
+        this.#spScoreNumber.draw();
+  
       }
 
     //------------------------------------------------------------------
@@ -177,20 +163,14 @@ spResumeClick () { //pause klikk funksjon
 
         this.#spAppleNumber.visible = true;
         this.#spScoreNumber.visible = true;
-        this.#spScoreNumber2.visible = true;
-        this.#spScoreNumber3.visible = true;
-
-        this.#spAppleNumber.index = GameProps.appleValue;
-        //Her fikk jeg veiledning fra AI på hvordan man henter riktig tall basert på 100, 10 og ener plass. Fil vedlagt.
-        this.#spScoreNumber.index = Math.floor(GameProps.score / 100)%10; //finner hundre plassen
-        this.#spScoreNumber2.index = Math.floor(GameProps.score / 10)%10;//finner tier plassen
-        this.#spScoreNumber3.index = GameProps.score % 10;//finner ener plassen
-
+       
+        this.#spAppleNumber.value = GameProps.appleValue;
+        this.#spScoreNumber.value = GameProps.score;
+       
+       
         this.#spAppleNumber.draw();
         this.#spScoreNumber.draw();
-        this.#spScoreNumber2.draw();
-        this.#spScoreNumber3.draw();
-
+        
       } else {
         this.#spResume.visible = false;
       }
@@ -203,18 +183,14 @@ spResumeClick () { //pause klikk funksjon
     this.#spRetry.visible = true;
     this.#spHome.visible = true;
     this.#spGameOverScore.visible = true;
-    this.#spGameOverScore2.visible = true;
-    this.#spGameOverScore3.visible = true;
+    
+    this.#spGameOverScore.value = GameProps.score;
+   
 
-    //Her fikk jeg veiledning fra AI på hvordan man henter riktig tall basert på 100, 10 og ener plass. Fil vedlagt.
-    this.#spGameOverScore.index = Math.floor(GameProps.score / 100)%10;//finner hundre plassen
-    this.#spGameOverScore2.index = Math.floor(GameProps.score / 10)%10;//finner tier plassen
-    this.#spGameOverScore3.index = GameProps.score % 10;//finner ener plassen
 
     this.#spGameOverMenu.draw();
     this.#spGameOverScore.draw();
-    this.#spGameOverScore2.draw();
-    this.#spGameOverScore3.draw();
+
     
     this.#spRetry.draw();
     this.#spHome.draw();
